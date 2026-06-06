@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel do cliente | Aluga Fácil</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="../index.html">
+        <img src="../assets/img/logo-aluga-facil.jpg" alt="Aluga Fácil">
+      </a>
+
+      <nav class="sidebar-menu">
+        <a class="sidebar-link active" href="#">Resumo</a>
+        <a class="sidebar-link" href="orcamento.html">Novo orçamento</a>
+        <a class="sidebar-link" href="veiculos.html">Ver veículos</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a class="btn btn-primary" href="orcamento.html">Novo orçamento</a>
+      </div>
+    </aside>
+
+    <main class="app-main">
+      <div class="topbar">
+        <div class="topbar-search">
+          <span>⌕</span>
+          <input type="text" placeholder="Buscar no painel">
+        </div>
+
+        <div class="actions-inline">
+          <span class="badge dark">Cliente</span>
+          <button class="btn btn-secondary" onclick="logout()">Sair</button>
+        </div>
+      </div>
+
+      <section class="content-area">
+        <div class="stat-grid">
+          <article class="stat-card">
+            <div class="stat-icon" id="total-requests">0</div>
+            <h3>Solicitações</h3>
+            <p>Acompanhe seus pedidos enviados e consulte os status mais recentes.</p>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-icon">01</div>
+            <h3>Conta ativa</h3>
+            <p>Seu cadastro está ativo na plataforma Aluga Fácil.</p>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-icon">CNH</div>
+            <h3>Dados cadastrados</h3>
+            <p>Suas informações básicas ficam salvas para novos pedidos.</p>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-icon">+</div>
+            <h3>Novo orçamento</h3>
+            <p>Solicite uma nova locação diretamente pelo painel.</p>
+          </article>
+        </div>
+
+        <div class="dashboard-grid">
+          <article class="dashboard-card">
+            <h3>Minhas solicitações</h3>
+            <p>Resumo dos pedidos enviados pela sua conta.</p>
+
+            <div id="client-requests-container">
+              <p>Carregando solicitações...</p>
+            </div>
+          </article>
+
+          <article class="dashboard-card">
+            <h3>Minha conta</h3>
+            <p>Informações principais do seu cadastro.</p>
+
+            <div class="list-row">
+              <span>Nome</span>
+              <strong id="client-name">-</strong>
+            </div>
+
+            <div class="list-row">
+              <span>E-mail</span>
+              <strong id="client-email">-</strong>
+            </div>
+
+            <div class="list-row">
+              <span>Telefone</span>
+              <strong id="client-phone">-</strong>
+            </div>
+
+            <div class="list-row">
+              <span>CNH</span>
+              <strong id="client-cnh">-</strong>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/auth.js"></script>
+  <script>
+    protectPage("cliente");
+  </script>
+  <script src="../assets/js/dashboard-cliente.js"></script>
+</body>
+</html>

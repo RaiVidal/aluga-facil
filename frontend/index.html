@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel admin | Aluga Fácil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+  <h1>TESTE: EU ESTOU MEXENDO NO ARQUIVO CERTO?</h1>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="../inicio/index.html"><img src="../assets/img/logo-aluga-facil.jpg" alt="Aluga Fácil"></a>
+      <nav class="sidebar-menu">
+        <a class="sidebar-link active" href="#">Dashboard</a>
+        <a class="sidebar-link" href="javascript:void(0);" id="link-veiculos">Veículos</a>
+        <a class="sidebar-link" href="javascript:void(0);" id="link-clientes">Clientes</a>
+        <a class="sidebar-link" href="#">Solicitações</a>
+        <a class="sidebar-link" href="#">Contratos</a>
+        <a class="sidebar-link" href="#">Pagamentos</a>
+        <a class="sidebar-link" href="#">Relatórios</a>
+      </nav>
+      <div class="sidebar-footer">
+        <a class="btn btn-primary" href="../inicio/index.html">Visualizar site</a>
+      </div>
+    </aside>
+    <main class="app-main">
+      <div class="topbar">
+        <div class="topbar-search"><span>⌕</span><input type="text" placeholder="Buscar veículo, cliente ou solicitação"></div>
+        <div class="actions-inline"><span class="badge">Administrador</span><a class="btn btn-secondary" href="../login/index.html">Sair</a></div>
+      </div>
+      <section class="content-area">
+        <div class="stat-grid">
+          <article class="stat-card"><div class="stat-icon" id="stat-veiculos-qtd">0</div><h3>Veículos ativos</h3><p>Controle da frota disponível para locação.</p></article>
+          <article class="stat-card"><div class="stat-icon" id="stat-clientes-qtd">0</div><h3>Clientes</h3><p>Base cadastrada para gestão comercial.</p></article>
+          <article class="stat-card"><div class="stat-icon">09</div><h3>Solicitações</h3><p>Pedidos recebidos para análise.</p></article>
+          <article class="stat-card"><div class="stat-icon">R$</div><h3>Receita</h3><p>Indicadores financeiros da operação.</p></article>
+        </div>
+        <div class="dashboard-grid">
+          <article class="dashboard-card">
+            <h3>Solicitações recentes</h3>
+            <p>Visão centralizada do fluxo comercial.</p>
+            <div class="list-row"><div><strong>Corolla • Cliente Premium</strong><div class="small">Período: 18/03 a 22/03</div></div><span class="badge">Novo pedido</span></div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="modal-veiculos-admin" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center; font-family: 'Inter', sans-serif;">
+    <div style="background: white; width: 85%; max-width: 800px; padding: 25px; border-radius: 16px; max-height: 85vh; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 15px;">
+        <h2 style="margin: 0; color: #121212;">🚗 Gerenciamento de Frota</h2>
+        <button id="fechar-modal-veiculos" style="background: none; border: none; font-size: 24px; cursor: pointer; color: #888;">&times;</button>
+      </div>
+      <div id="form-cadastro-veiculo" style="display: none; background: #f9f9f9; padding: 20px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #eee;">
+        <h4 style="margin-top: 0; margin-bottom: 15px; color: #a51c24;">Cadastrar Novo Veículo</h4>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div><label style="font-size: 12px; font-weight: bold;">Marca</label><input type="text" id="add-brand" placeholder="Ex: Toyota"></div>
+          <div><label style="font-size: 12px; font-weight: bold;">Modelo</label><input type="text" id="add-model" placeholder="Ex: Corolla"></div>
+          <div><label style="font-size: 12px; font-weight: bold;">Categoria</label><input type="text" id="add-category" placeholder="Ex: Sedan"></div>
+          <div><label style="font-size: 12px; font-weight: bold;">Preço da Diária (R$)</label><input type="number" id="add-rate" placeholder="Ex: 250"></div>
+          <div><label style="font-size: 12px; font-weight: bold;">Ano do Veículo</label><input type="number" id="add-year" placeholder="Ex: 2024"></div>
+        </div>
+        <div style="margin-top: 15px; display: flex; gap: 10px;">
+          <button id="btn-salvar-veiculo" style="background: #137333; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold;">Salvar no Banco</button>
+          <button id="btn-cancelar-cadastro" style="background: #757575; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold;">Cancelar</button>
+        </div>
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+        <h3 style="margin: 0; font-size: 16px;">Veículos Cadastrados</h3>
+        <button id="btn-abrir-cadastro" style="background: #a51c24; color: white; border: none; padding: 8px 14px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 13px;">+ Cadastrar Veículo</button>
+      </div>
+      <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;">
+        <thead>
+          <tr style="background: #f1f3f4; border-bottom: 2px solid #ddd;">
+            <th style="padding: 10px;">ID</th>
+            <th style="padding: 10px;">Veículo</th>
+            <th style="padding: 10px;">Categoria</th>
+            <th style="padding: 10px;">Valor Diária</th>
+            <th style="padding: 10px;">Ações</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-veiculos-corpo"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="modal-clientes-admin" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center; font-family: 'Inter', sans-serif;">
+    <div style="background: white; width: 85%; max-width: 800px; padding: 25px; border-radius: 16px; max-height: 85vh; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+      
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 15px;">
+        <h2 style="margin: 0; color: #121212;">👥 Clientes Cadastrados</h2>
+        <button id="fechar-modal-clientes" style="background: none; border: none; font-size: 24px; cursor: pointer; color: #888;">&times;</button>
+      </div>
+
+      <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;">
+        <thead>
+          <tr style="background: #f1f3f4; border-bottom: 2px solid #ddd;">
+            <th style="padding: 10px;">ID</th>
+            <th style="padding: 10px;">Nome</th>
+            <th style="padding: 10px;">E-mail</th>
+            <th style="padding: 10px;">Ações</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-clientes-corpo">
+          <tr><td colspan="4" style="padding:15px; text-align:center; color:#888;">Carregando clientes...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', async () => {
+        
+        // --- COLETAR SOLICITAÇÕES NA DASHBOARD ---
+        const cardSolicitacoes = document.querySelector('.dashboard-card');
+        if (cardSolicitacoes) {
+            try {
+                const response = await fetch('http://127.0.0.1:8000/api/budget-requests');
+                if (response.ok) {
+                    const solicitacoes = await response.json();
+                    let novoConteudo = `<h3>Solicitações recentes</h3><p>Visão centralizada do fluxo comercial.</p>`;
+                    solicitacoes.forEach(pedido => {
+                        novoConteudo += `
+                            <div class="list-row" style="padding: 12px 0; border-bottom: 1px solid #eee;">
+                                <div><strong>${pedido.vehicle || pedido.vehicle_model || 'Carro'} • ${pedido.name || 'Cliente'}</strong></div>
+                                <span class="badge">${pedido.status || 'pendente'}</span>
+                            </div>`;
+                    });
+                    cardSolicitacoes.innerHTML = novoConteudo;
+                }
+            } catch (e) { console.error(e); }
+        }
+
+        // --- SISTEMA DE VEÍCULOS (JÁ FUNCIONANDO) ---
+        const linkVeiculos = document.getElementById('link-veiculos');
+        const modalVeiculos = document.getElementById('modal-veiculos-admin');
+        const fecharModalVeic = document.getElementById('fechar-modal-veiculos');
+        const tabelaVeicCorpo = document.getElementById('tabela-veiculos-corpo');
+
+        async function carregarVeiculos() {
+            try {
+                const r = await fetch('http://127.0.0.1:8000/api/vehicles');
+                if(r.ok) {
+                    const dados = await r.json();
+                    document.getElementById('stat-veiculos-qtd').innerText = dados.length;
+                    tabelaVeicCorpo.innerHTML = '';
+                    dados.forEach(c => {
+                        tabelaVeicCorpo.innerHTML += `<tr><td style="padding:10px;">${c.id}</td><td style="padding:10px;">${c.name || c.model}</td><td style="padding:10px;">${c.category||'Sedan'}</td><td style="padding:10px;">R$ ${c.price_per_day||c.daily_rate}</td><td style="padding:10px;"><button style="background:#d32f2f;color:white;border:none;border-radius:4px;padding:4px 8px;cursor:pointer;">Excluir</button></td></tr>`;
+                    });
+                }
+            } catch(e){}
+        }
+        linkVeiculos.addEventListener('click', () => { modalVeiculos.style.display = 'flex'; carregarVeiculos(); });
+        fecharModalVeic.addEventListener('click', () => modalVeiculos.style.display = 'none');
+        carregarVeiculos();
+
+        // --- NOVO: SISTEMA DE CLIENTES (API DO LARAVEL) ---
+        const linkClientes = document.getElementById('link-clientes');
+        const modalClientes = document.getElementById('modal-clientes-admin');
+        const fecharModalCli = document.getElementById('fechar-modal-clientes');
+        const tabelaClientesCorpo = document.getElementById('tabela-clientes-corpo');
+
+        async function carregarClientesAdmin() {
+            try {
+                // Rota padrão do Laravel Jetstream/Sanctum ou sua API customizada de listagem de users
+                const response = await fetch('http://127.0.0.1:8000/api/users', {
+                    method: 'GET',
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    const clientes = await response.json();
+                    document.getElementById('stat-clientes-qtd').innerText = clientes.length;
+                    tabelaClientesCorpo.innerHTML = '';
+
+                    if (clientes.length === 0) {
+                        tabelaClientesCorpo.innerHTML = `<tr><td colspan="4" style="padding:15px; text-align:center; color:#888;">Nenhum cliente cadastrado ainda.</td></tr>`;
+                        return;
+                    }
+
+                    clientes.forEach(cli => {
+                        tabelaClientesCorpo.innerHTML += `
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td style="padding: 10px;">${cli.id}</td>
+                                <td style="padding: 10px;"><strong>${cli.name}</strong></td>
+                                <td style="padding: 10px;">${cli.email}</td>
+                                <td style="padding: 10px;">
+                                    <button onclick="deletarCliente(${cli.id})" style="background:#d32f2f; color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer; font-size:12px; font-weight:bold;">Remover</button>
+                                </td>
+                            </tr>
+                        `;
+                    });
+                } else {
+                    tabelaClientesCorpo.innerHTML = `<tr><td colspan="4" style="padding:15px; text-align:center; color:#d32f2f;">Erro ao puxar dados (A rota /api/users está ativa?).</td></tr>`;
+                }
+            } catch (error) {
+                console.error(error);
+                tabelaClientesCorpo.innerHTML = `<tr><td colspan="4" style="padding:15px; text-align:center; color:#d32f2f;">Erro de conexão com o servidor.</td></tr>`;
+            }
+        }
+
+        // Função global para excluir cliente se precisar
+        window.deletarCliente = async (id) => {
+            if (confirm("Deseja mesmo remover esse usuário do sistema?")) {
+                try {
+                    const res = await fetch(`http://127.0.0.1:8000/api/users/${id}`, { method: 'DELETE' });
+                    if(res.ok) { alert("Usuário removido! 👥"); carregarClientesAdmin(); }
+                } catch(e) { alert("Erro ao deletar."); }
+            }
+        };
+
+        // Escutadores do Modal de Clientes
+        linkClientes.addEventListener('click', () => {
+            modalClientes.style.display = 'flex';
+            carregarClientesAdmin();
+        });
+
+        fecharModalCli.addEventListener('click', () => {
+            modalClientes.style.display = 'none';
+        });
+
+        // Executa uma vez no início para atualizar os números dos cards na tela principal
+        carregarClientesAdmin();
+    });
+  </script>
+</body>
+</html>

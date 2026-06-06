@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solicitações | Aluga Fácil</title>
+
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="../index.html">
+        <img src="../assets/img/logo-aluga-facil.jpg" alt="Aluga Fácil">
+      </a>
+
+      <nav class="sidebar-menu">
+        <a class="sidebar-link" href="dashboard-admin.html">Dashboard</a>
+        <a class="sidebar-link" href="gestao-veiculos.html">Veículos</a>
+        <a class="sidebar-link" href="cadastro-veiculo.html">Cadastrar veículo</a>
+        <a class="sidebar-link" href="clientes.html">Clientes</a>
+        <a class="sidebar-link" href="reservas.html">Reservas</a>
+        <a class="sidebar-link active" href="solicitacoes.html">Solicitações</a>
+        <a class="sidebar-link" href="relatorios.html">Relatórios</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a class="btn btn-primary" href="../index.html">Visualizar site</a>
+      </div>
+    </aside>
+
+    <main class="app-main">
+      <div class="topbar">
+        <div class="topbar-search">
+          <span>⌕</span>
+          <input type="text" placeholder="Buscar solicitação">
+        </div>
+
+        <div class="actions-inline">
+          <span class="badge">Administrador</span>
+          <button class="btn btn-secondary" onclick="logout()">Sair</button>
+        </div>
+      </div>
+
+      <section class="content-area">
+        <div>
+          <span class="eyebrow">Solicitações</span>
+          <h1>Orçamentos recebidos</h1>
+          <p class="small">Controle os pedidos enviados pelos clientes.</p>
+        </div>
+
+        <div id="budget-requests-container" class="grid-3" style="margin-top:24px;">
+          <p>Carregando solicitações...</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="../assets/js/auth.js"></script>
+  <script>
+    protectPage("admin");
+  </script>
+  <script src="../assets/js/admin-budget-requests.js"></script>
+</body>
+</html>

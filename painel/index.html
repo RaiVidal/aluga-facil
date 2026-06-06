@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel do cliente | Aluga Fácil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="../inicio/index.html"><img src="../assets/img/logo-aluga-facil.jpg" alt="Aluga Fácil"></a>
+      <nav class="sidebar-menu">
+        <a class="sidebar-link active" href="#">Resumo</a>
+        <a class="sidebar-link" href="#">Minhas solicitações</a>
+        <a class="sidebar-link" href="#">Histórico</a>
+        <a class="sidebar-link" href="#">Contratos</a>
+        <a class="sidebar-link" href="#">Pagamentos</a>
+        <a class="sidebar-link" href="#">Suporte</a>
+        <a class="sidebar-link" href="#">Perfil</a>
+      </nav>
+      <div class="sidebar-footer">
+        <a class="btn btn-primary" href="../solicitar-orcamento/index.html">Novo orçamento</a>
+      </div>
+    </aside>
+    <main class="app-main">
+      <div class="topbar">
+        <div class="topbar-search"><span>⌕</span><input type="text" placeholder="Buscar no painel"></div>
+        <div class="actions-inline"><span class="badge dark">Cliente</span><a class="btn btn-secondary" href="../inicio/index.html">Voltar ao site</a></div>
+      </div>
+      <section class="content-area">
+        <div class="stat-grid">
+          <article class="stat-card"><div class="stat-icon">01</div><h3>3 solicitações</h3><p>Acompanhe os pedidos enviados e consulte os status mais recentes do atendimento.</p></article>
+          <article class="stat-card"><div class="stat-icon">02</div><h3>1 contrato</h3><p>Área dedicada para visualizar contratos vinculados às locações aprovadas.</p></article>
+          <article class="stat-card"><div class="stat-icon">03</div><h3>2 pagamentos</h3><p>Espaço preparado para consultar cobranças, vencimentos e histórico financeiro.</p></article>
+          <article class="stat-card"><div class="stat-icon">04</div><h3>Suporte ativo</h3><p>Canal centralizado para contato, orientações e acompanhamento da locação.</p></article>
+        </div>
+        <div class="dashboard-grid">
+          <article class="dashboard-card">
+            <h3>Solicitações recentes</h3>
+            <p>Resumo das últimas movimentações registradas na sua conta.</p>
+            <div class="list-row"><div><strong>Jeep Compass</strong><div class="small">Retirada: 12/03 • Devolução: 16/03</div></div><span class="badge">Em análise</span></div>
+            <div class="list-row"><div><strong>Toyota Corolla</strong><div class="small">Retirada: 20/03 • Devolução: 23/03</div></div><span class="badge dark">Concluído</span></div>
+            <div class="list-row"><div><strong>HB20 Comfort</strong><div class="small">Retirada: 28/03 • Devolução: 30/03</div></div><span class="badge">Aguardando retorno</span></div>
+          </article>
+          <article class="dashboard-card">
+            <h3>Minha conta</h3>
+            <p>Informações principais do cadastro para facilitar o acompanhamento da locação.</p>
+            <div class="list-row"><span>Nome</span><strong>Cliente Exemplo</strong></div>
+            <div class="list-row"><span>E-mail</span><strong>cliente@email.com</strong></div>
+            <div class="list-row"><span>Telefone</span><strong>(88) 99999-9999</strong></div>
+            <div class="list-row"><span>CNH</span><strong>Categoria B</strong></div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

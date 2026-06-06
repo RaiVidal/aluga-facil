@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservas | Aluga Fácil</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="../index.html">
+        <img src="../assets/img/logo-aluga-facil.jpg" alt="Aluga Fácil">
+      </a>
+
+      <nav class="sidebar-menu">
+        <a class="sidebar-link" href="dashboard-admin.html">Dashboard</a>
+        <a class="sidebar-link" href="gestao-veiculos.html">Veículos</a>
+        <a class="sidebar-link" href="cadastro-veiculo.html">Cadastrar veículo</a>
+        <a class="sidebar-link" href="clientes.html">Clientes</a>
+        <a class="sidebar-link active" href="reservas.html">Reservas</a>
+        <a class="sidebar-link" href="solicitacoes.html">Solicitações</a>
+        <a class="sidebar-link" href="relatorios.html">Relatórios</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a class="btn btn-primary" href="../index.html">Visualizar site</a>
+      </div>
+    </aside>
+
+    <main class="app-main">
+      <div class="topbar">
+        <div class="topbar-search">
+          <span>⌕</span>
+          <input type="text" placeholder="Buscar reserva">
+        </div>
+
+        <div class="actions-inline">
+          <span class="badge">Administrador</span>
+          <button class="btn btn-secondary" onclick="logout()">Sair</button>
+        </div>
+      </div>
+
+      <section class="content-area">
+        <section class="form-section">
+          <h1>Gestão de Reservas</h1>
+          <p>Cadastre e acompanhe reservas de veículos.</p>
+
+          <form id="reservaForm" class="form-grid">
+            <div class="form-group">
+              <label>Cliente</label>
+              <select id="cliente" name="cliente" required>
+                <option value="">Carregando clientes...</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Veículo</label>
+              <select id="veiculo" name="veiculo" required>
+                <option value="">Carregando veículos...</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Data de retirada</label>
+              <input id="retirada" type="date" name="retirada" required>
+            </div>
+
+            <div class="form-group">
+              <label>Data de devolução</label>
+              <input id="devolucao" type="date" name="devolucao" required>
+            </div>
+
+            <div class="form-group">
+              <label>Observações</label>
+              <input id="observacoes" type="text" name="observacoes" placeholder="Opcional">
+            </div>
+
+            <div class="form-group" style="align-self:end;">
+              <button type="submit" class="btn btn-primary" style="width:100%;">Criar reserva</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="table-section">
+          <h2>Reservas cadastradas</h2>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Veículo</th>
+                <th>Retirada</th>
+                <th>Devolução</th>
+                <th>Dias</th>
+                <th>Valor Total</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+
+            <tbody id="tabelaReservas">
+              <tr>
+                <td colspan="8">Carregando reservas...</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <script src="../assets/js/auth.js"></script>
+  <script>
+    protectPage("admin");
+  </script>
+  <script src="../assets/js/reservas.js"></script>
+</body>
+</html>

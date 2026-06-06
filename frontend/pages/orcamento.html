@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solicitar orçamento | Aluga Fácil</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html">
+        <img src="../assets/img/logo-aluga-facil.jpg" alt="Aluga Fácil">
+      </a>
+
+      <nav class="nav">
+        <a href="../index.html">Início</a>
+        <a href="veiculos.html">Veículos</a>
+        <a href="dashboard-cliente.html">Meu painel</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="btn btn-secondary" href="veiculos.html">Ver veículos</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="eyebrow">Solicitação de orçamento</div>
+        <h1>Informe os dados da locação e receba uma proposta da Aluga Fácil.</h1>
+        <p>Preencha os campos abaixo para que a equipe avalie a disponibilidade da frota.</p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:8px;">
+      <div class="container grid-2">
+        <article class="form-card">
+          <h3>Dados da locação</h3>
+
+          <form id="budget-form">
+            <div class="field">
+              <label>Nome completo</label>
+              <input id="name" type="text" placeholder="Seu nome" required>
+            </div>
+
+            <div class="field">
+              <label>Telefone</label>
+              <input id="phone" type="text" placeholder="(00) 00000-0000" required>
+            </div>
+
+            <div class="field">
+              <label>Veículo desejado</label>
+              <input id="vehicle" type="text" placeholder="Ex: Toyota Corolla" required>
+            </div>
+
+            <div class="field">
+              <label>Data de retirada</label>
+              <input id="start_date" type="date" required>
+            </div>
+
+            <div class="field">
+              <label>Data de devolução</label>
+              <input id="end_date" type="date" required>
+            </div>
+
+            <div class="field full">
+              <label>Observações</label>
+              <textarea id="message" placeholder="Informe detalhes da locação desejada"></textarea>
+            </div>
+
+            <div class="field full">
+              <button class="btn btn-primary" type="submit">Enviar solicitação</button>
+            </div>
+          </form>
+        </article>
+
+        <article class="form-card">
+          <h3>O que você poderá acompanhar</h3>
+          <p>Após o envio da solicitação, você poderá acompanhar esse pedido no seu painel do cliente.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/auth.js"></script>
+  <script src="../assets/js/orcamento.js"></script>
+</body>
+</html>

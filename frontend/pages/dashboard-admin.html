@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel admin | Aluga Fácil</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="../index.html">
+        <img src="../assets/img/logo-aluga-facil.jpg" alt="Aluga Fácil">
+      </a>
+
+      <nav class="sidebar-menu">
+        <a class="sidebar-link active" href="dashboard-admin.html">Dashboard</a>
+        <a class="sidebar-link" href="gestao-veiculos.html">Veículos</a>
+        <a class="sidebar-link" href="cadastro-veiculo.html">Cadastrar veículo</a>
+        <a class="sidebar-link" href="clientes.html">Clientes</a>
+        <a class="sidebar-link" href="reservas.html">Reservas</a>
+        <a class="sidebar-link" href="solicitacoes.html">Solicitações</a>
+        <a class="sidebar-link" href="relatorios.html">Relatórios</a>
+        <a class="sidebar-link" href="../index.html">Visualizar site</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a class="btn btn-primary" href="../index.html">Visualizar site</a>
+      </div>
+    </aside>
+
+    <main class="app-main">
+      <div class="topbar">
+        <div class="topbar-search">
+          <span>⌕</span>
+          <input type="text" placeholder="Buscar veículo, cliente ou solicitação">
+        </div>
+
+        <div class="actions-inline">
+          <span class="badge">Administrador</span>
+          <button class="btn btn-secondary" onclick="logout()">Sair</button>
+        </div>
+      </div>
+
+      <section class="content-area">
+        <div class="stat-grid">
+          <article class="stat-card">
+            <div class="stat-icon" id="admin-total-vehicles">0</div>
+            <h3>Veículos ativos</h3>
+            <p>Controle da frota cadastrada na plataforma.</p>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-icon" id="admin-total-clients">0</div>
+            <h3>Clientes</h3>
+            <p>Base cadastrada para gestão comercial e atendimento.</p>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-icon" id="admin-total-requests">0</div>
+            <h3>Solicitações</h3>
+            <p>Pedidos recebidos para análise e retorno.</p>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-icon">R$</div>
+            <h3>Receita</h3>
+            <p>Área preparada para indicadores financeiros futuros.</p>
+          </article>
+        </div>
+
+        <div class="dashboard-grid">
+          <article class="dashboard-card">
+            <h3>Solicitações recentes</h3>
+            <p>Pedidos mais recentes enviados pelos clientes.</p>
+
+            <div id="recent-requests-container">
+              <p>Carregando solicitações recentes...</p>
+            </div>
+          </article>
+
+          <article class="dashboard-card">
+            <h3>Resumo operacional</h3>
+            <p>Indicadores essenciais para acompanhar a operação.</p>
+
+            <div class="list-row">
+              <span>Veículos disponíveis</span>
+              <strong id="admin-available-vehicles">0</strong>
+            </div>
+
+            <div class="list-row">
+              <span>Veículos indisponíveis</span>
+              <strong id="admin-unavailable-vehicles">0</strong>
+            </div>
+
+            <div class="list-row">
+              <span>Solicitações recebidas</span>
+              <strong id="admin-operational-requests">0</strong>
+            </div>
+
+            <div class="list-row">
+              <span>Clientes cadastrados</span>
+              <strong id="admin-operational-clients">0</strong>
+            </div>
+          </article>
+        </div>
+
+        <section id="orcamentos-admin" class="section" style="padding-bottom:0;">
+          <div class="section-title">
+            <div>
+              <span class="eyebrow">Solicitações</span>
+              <h2>Orçamentos recebidos</h2>
+            </div>
+          </div>
+
+          <div id="budget-requests-container" class="grid-3">
+            <p>Carregando solicitações...</p>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <script src="../assets/js/auth.js"></script>
+<script>
+  protectPage("admin");
+</script>
+<script src="../assets/js/admin-budget-requests.js"></script>
+  
+</body>
+</html>

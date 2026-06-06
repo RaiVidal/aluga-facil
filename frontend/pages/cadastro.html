@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadastro | Aluga Fácil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+  <div class="auth-wrap">
+    <aside class="auth-side">
+      <a class="auth-brand" href="../index.html"><img src="../assets/img/logo-aluga-facil.jpg" alt="Aluga Fácil"></a>
+      <h2>Crie sua conta para agilizar futuras locações e acompanhar tudo em um só lugar.</h2>
+      <p>Com o cadastro na Aluga Fácil, o cliente pode enviar solicitações, manter seus dados atualizados e acompanhar sua jornada com mais praticidade.</p>
+      <div class="auth-benefits">
+        <div class="auth-benefit"><h3>Solicitação mais rápida</h3><p>Tenha suas informações básicas registradas para facilitar novos pedidos de orçamento e atendimento.</p></div>
+        <div class="auth-benefit"><h3>Área personalizada</h3><p>Acompanhe solicitações, contratos, pagamentos e histórico de locações em um único painel.</p></div>
+        <div class="auth-benefit"><h3>Gestão cadastral</h3><p>Mantenha seus dados pessoais e informações da CNH organizados para futuras etapas da contratação.</p></div>
+      </div>
+    </aside>
+    <main class="auth-main">
+      <section class="auth-card" style="max-width:620px;">
+        <div class="eyebrow">Novo cadastro</div>
+       <h1>Crie sua conta para alugar com praticidade.</h1>
+
+<p>
+Cadastre-se para solicitar orçamentos, acompanhar suas solicitações
+e acessar sua área exclusiva na Aluga Fácil.
+</p>
+<form id="signup-form" class="form-grid" style="grid-template-columns:1fr 1fr;">
+  <div class="field">
+    <label>Nome completo</label>
+    <input id="signup-name" type="text" placeholder="Seu nome" required>
+  </div>
+
+  <div class="field">
+    <label>CPF</label>
+    <input id="signup-cpf" type="text" placeholder="000.000.000-00" maxlength="14" required>
+  </div>
+
+  <div class="field">
+    <label>E-mail</label>
+    <input id="signup-email" type="email" placeholder="seunome@email.com" required>
+  </div>
+
+  <div class="field">
+    <label>Telefone</label>
+    <input id="signup-phone" type="text" placeholder="(00) 00000-0000" maxlength="15" required>
+  </div>
+
+  <div class="field">
+    <label>CNH</label>
+    <input id="signup-cnh" type="text" placeholder="00000000000" maxlength="11" required>
+  </div>
+
+  <div class="field">
+    <label>Categoria</label>
+    <select id="signup-category" required>
+      <option value="">Selecione</option>
+      <option value="B">B</option>
+      <option value="C">C</option>
+      <option value="D">D</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label>Senha</label>
+    <input id="signup-password" type="password" placeholder="Mínimo 6 caracteres, letras e números" required>
+  </div>
+
+  <div class="field">
+    <label>Confirmar senha</label>
+    <input id="signup-confirm-password" type="password" placeholder="Repita a senha" required>
+  </div>
+
+  <div class="field full">
+    <button class="btn btn-primary" type="submit">Criar conta</button>
+  </div>
+</form>
+        <p class="small" style="margin-top:18px;">Já possui cadastro? <a style="color:var(--primary);font-weight:600;" href="login.html">Entrar agora</a></p>
+      </section>
+    </main>
+  </div>
+<script src="../assets/js/auth.js"></script> 
+</body>
+</html>

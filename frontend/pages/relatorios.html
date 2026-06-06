@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relatórios | Aluga Fácil</title>
+
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="../index.html">
+        <img src="../assets/img/logo-aluga-facil.jpg" alt="Aluga Fácil">
+      </a>
+
+      <nav class="sidebar-menu">
+        <a class="sidebar-link" href="dashboard-admin.html">Dashboard</a>
+        <a class="sidebar-link" href="gestao-veiculos.html">Veículos</a>
+        <a class="sidebar-link" href="cadastro-veiculo.html">Cadastrar veículo</a>
+        <a class="sidebar-link" href="clientes.html">Clientes</a>
+        <a class="sidebar-link" href="reservas.html">Reservas</a>
+        <a class="sidebar-link" href="solicitacoes.html">Solicitações</a>
+        <a class="sidebar-link active" href="relatorios.html">Relatórios</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a class="btn btn-primary" href="../index.html">Visualizar site</a>
+      </div>
+    </aside>
+
+    <main class="app-main">
+      <div class="topbar">
+        <div class="topbar-search">
+          <span>⌕</span>
+          <input type="text" placeholder="Relatórios do sistema">
+        </div>
+
+        <div class="actions-inline">
+          <span class="badge">Administrador</span>
+          <button class="btn btn-secondary" onclick="logout()">Sair</button>
+        </div>
+      </div>
+
+      <section class="content-area">
+        <div style="margin-bottom:24px;">
+          <h1>Relatórios</h1>
+          <p class="small">Visão consolidada de veículos, clientes, reservas e orçamentos.</p>
+        </div>
+
+        <div class="stat-grid">
+          <div class="stat-card">
+            <p class="small">Total de Veículos</p>
+            <h2 id="r-vehicles-total" style="font-size:32px; font-weight:800;">-</h2>
+          </div>
+
+          <div class="stat-card">
+            <p class="small">Veículos Disponíveis</p>
+            <h2 id="r-vehicles-available" style="font-size:32px; font-weight:800;">-</h2>
+          </div>
+
+          <div class="stat-card">
+            <p class="small">Clientes Cadastrados</p>
+            <h2 id="r-clients-total" style="font-size:32px; font-weight:800;">-</h2>
+          </div>
+
+          <div class="stat-card">
+            <p class="small">Total de Reservas</p>
+            <h2 id="r-reservations-total" style="font-size:32px; font-weight:800;">-</h2>
+          </div>
+
+          <div class="stat-card">
+            <p class="small">Total de Orçamentos</p>
+            <h2 id="r-budgets-total" style="font-size:32px; font-weight:800;">-</h2>
+          </div>
+
+          <div class="stat-card">
+            <p class="small">Receita Total Estimada</p>
+            <h2 id="r-revenue-total" style="font-size:24px; font-weight:800;">-</h2>
+          </div>
+        </div>
+
+        <section class="table-section">
+          <h2>Todas as Reservas</h2>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Veículo</th>
+                <th>Retirada</th>
+                <th>Devolução</th>
+                <th>Dias</th>
+                <th>Valor</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody id="tabela-relatorio-reservas">
+              <tr>
+                <td colspan="7">Carregando...</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="table-section">
+          <h2>Todos os Orçamentos Solicitados</h2>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Telefone</th>
+                <th>Veículo</th>
+                <th>Retirada</th>
+                <th>Devolução</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody id="tabela-relatorio-orcamentos">
+              <tr>
+                <td colspan="6">Carregando...</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <script src="../assets/js/auth.js"></script>
+  <script>
+    protectPage("admin");
+  </script>
+
+  <script>
+    const API_URL_RELATORIOS = "http://127.0.0.1:8000/api";
+
+    function statusLabel(status) {
+      const map = {
+        pendente: "Pendente",
+        confirmada: "Confirmada",
+        em_andamento: "Em andamento",
+        concluida: "Concluída",
+        cancelada: "Cancelada",
+        em_analise: "Em análise",
+        aprovado: "Aprovado",
+        rejeitado: "Rejeitado",
+        concluido: "Concluído",
+      };
+
+      return map[status] || status || "-";
+    }
+
+    async function carregarRelatorios() {
+      try {
+        const statsRes = await fetch(`${API_URL_RELATORIOS}/admin/stats`);
+        const stats = await statsRes.json();
+
+        document.getElementById("r-vehicles-total").textContent = stats.vehicles_total ?? 0;
+        document.getElementById("r-vehicles-available").textContent = stats.vehicles_available ?? 0;
+        document.getElementById("r-clients-total").textContent = stats.clients_total ?? 0;
+        document.getElementById("r-budgets-total").textContent = stats.budget_requests_total ?? 0;
+        document.getElementById("r-reservations-total").textContent = stats.reservations_total ?? 0;
+
+        const resRes = await fetch(`${API_URL_RELATORIOS}/reservations`);
+        const reservas = await resRes.json();
+
+        const receita = reservas
+          .filter(r => r.status !== "cancelada")
+          .reduce((sum, r) => sum + Number(r.total_value || 0), 0);
+
+        document.getElementById("r-revenue-total").textContent = "R$ " + receita.toFixed(2);
+
+        const tReservas = document.getElementById("tabela-relatorio-reservas");
+
+        if (!reservas.length) {
+          tReservas.innerHTML = `<tr><td colspan="7">Nenhuma reserva.</td></tr>`;
+        } else {
+          tReservas.innerHTML = reservas.map(r => `
+            <tr>
+              <td>${r.client_name || "-"}</td>
+              <td>${r.vehicle_name || "-"}</td>
+              <td>${r.start_date || "-"}</td>
+              <td>${r.end_date || "-"}</td>
+              <td>${r.total_days || 0}d</td>
+              <td>R$ ${Number(r.total_value || 0).toFixed(2)}</td>
+              <td>${statusLabel(r.status)}</td>
+            </tr>
+          `).join("");
+        }
+
+        const budgRes = await fetch(`${API_URL_RELATORIOS}/budget-requests`);
+        const budgets = await budgRes.json();
+        const tBudgets = document.getElementById("tabela-relatorio-orcamentos");
+
+        if (!budgets.length) {
+          tBudgets.innerHTML = `<tr><td colspan="6">Nenhum orçamento.</td></tr>`;
+        } else {
+          tBudgets.innerHTML = budgets.map(b => `
+            <tr>
+              <td>${b.name || "-"}</td>
+              <td>${b.phone || "-"}</td>
+              <td>${b.vehicle || "-"}</td>
+              <td>${b.start_date || "-"}</td>
+              <td>${b.end_date || "-"}</td>
+              <td>${statusLabel(b.status)}</td>
+            </tr>
+          `).join("");
+        }
+
+      } catch (error) {
+        console.error("Erro ao carregar relatórios:", error);
+      }
+    }
+
+    carregarRelatorios();
+  </script>
+</body>
+</html>

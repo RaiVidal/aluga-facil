@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aluga Fácil | Locação de carros com praticidade e confiança</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <style>
+    .hero-photo-wrap {
+      margin-top: 58px;
+      background: linear-gradient(180deg, #151515, #282828);
+      border-radius: 28px;
+      min-height: 300px;
+      position: relative;
+      overflow: hidden;
+      padding: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-photo-wrap::before {
+      content: "";
+      position: absolute;
+      inset: auto 20px 28px 20px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.24);
+      filter: blur(12px);
+    }
+    .hero-photo-wrap img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 520px;
+      max-height: 280px;
+      object-fit: contain;
+    }
+    .vehicle-thumb {
+      height: 220px;
+      border-radius: 22px;
+      background: #fff;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(18,18,18,0.06);
+    }
+    .vehicle-thumb::before,
+    .vehicle-thumb::after {
+      display: none !important;
+      content: none !important;
+    }
+    .vehicle-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" href="../inicio/index.html"><img src="../assets/img/logo-aluga-facil.jpg" alt="Aluga Fácil"></a>
+      <nav class="nav">
+        <a href="../inicio/index.html">Início</a>
+        <a href="../veiculos/index.html">Veículos</a>
+        <a href="#beneficios">Benefícios</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="header-actions">
+        <a class="btn btn-secondary" href="../login/index.html">Entrar</a>
+        <a class="btn btn-primary" href="../solicitar-orcamento/index.html">Solicitar orçamento</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Locação de carros com atendimento ágil e proposta sob medida</div>
+          <h1>Encontre o veículo ideal para sua rotina, viagem ou demanda corporativa.</h1>
+          <p>Na Aluga Fácil, você solicita seu orçamento com rapidez, conhece as principais categorias da frota e conta com uma experiência organizada do primeiro acesso até o acompanhamento da sua locação.</p>
+          <div class="actions-inline">
+            <a class="btn btn-primary" href="../solicitar-orcamento/index.html">Solicitar orçamento</a>
+            <a class="btn btn-secondary" href="../veiculos/index.html">Ver veículos</a>
+          </div>
+        </div>
+        <div class="hero-panel hero-visual">
+          <div class="hero-badge">Atendimento rápido • Frota selecionada</div>
+          <div class="hero-photo-wrap">
+            <img src="../assets/img/veiculos/hero-carro.png" alt="Veículo em destaque Aluga Fácil">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="orcamento">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Solicite seu orçamento de forma simples e organizada.</h2>
+            <p>Preencha os dados principais da locação para receber uma proposta alinhada ao período, à categoria e à cidade desejada.</p>
+          </div>
+        </div>
+        <div class="form-card">
+          <h3>Solicitação de locação</h3>
+          <p>Informe os dados iniciais para que a equipe da Aluga Fácil entre em contato com a melhor condição disponível.</p>
+          <form class="form-grid">
+            <div class="field"><label>Cidade de retirada</label><select><option>Selecione a cidade</option><option>Fortaleza</option><option>Juazeiro do Norte</option><option>Recife</option></select></div>
+            <div class="field"><label>Cidade de devolução</label><select><option>Selecione a cidade</option><option>Fortaleza</option><option>Juazeiro do Norte</option><option>Recife</option></select></div>
+            <div class="field"><label>Data de retirada</label><input type="date"></div>
+            <div class="field"><label>Data de devolução</label><input type="date"></div>
+            <div class="field"><label>Categoria</label><select><option>Escolha uma categoria</option><option>Hatch</option><option>Sedan</option><option>SUV</option><option>Executivo</option></select></div>
+            <div class="field"><label>Modelo desejado</label><input type="text" placeholder="Ex.: Corolla, Compass, HB20"></div>
+            <div class="field full"><button class="btn btn-primary" type="button">Solicitar orçamento agora</button></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="beneficios">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Por que escolher a Aluga Fácil.</h2>
+            <p>Uma operação pensada para oferecer praticidade, transparência e mais segurança em cada etapa da locação.</p>
+          </div>
+        </div>
+        <div class="grid-4">
+          <article class="feature-card"><div class="feature-icon">01</div><h3>Atendimento ágil</h3><p>Solicite seu orçamento e receba retorno com mais rapidez para não perder tempo na contratação.</p></article>
+          <article class="feature-card"><div class="feature-icon">02</div><h3>Frota diversificada</h3><p>Opções para uso urbano, viagens, compromissos executivos e necessidades corporativas.</p></article>
+          <article class="feature-card"><div class="feature-icon">03</div><h3>Processo claro</h3><p>Informações organizadas para facilitar a escolha do veículo e o entendimento das condições da locação.</p></article>
+          <article class="feature-card"><div class="feature-icon">04</div><h3>Acompanhamento completo</h3><p>Área preparada para concentrar solicitações, contratos, pagamentos e histórico do cliente.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Veículos em destaque.</h2>
+            <p>Modelos selecionados para diferentes perfis de locação, com foco em conforto, desempenho e praticidade.</p>
+          </div>
+          <a class="btn btn-secondary" href="../veiculos/index.html">Ver catálogo completo</a>
+        </div>
+        <div class="grid-3">
+          <article class="vehicle-card">
+            <div class="vehicle-thumb"><img src="../assets/img/veiculos/corolla.jpg" alt="Toyota Corolla"></div>
+            <h3>Toyota Corolla</h3>
+            <p>Sedan executivo indicado para quem busca conforto, desempenho e uma condução mais refinada.</p>
+            <div class="tags"><span class="tag">Automático</span><span class="tag">Sedan</span><span class="tag">Flex</span></div>
+            <div class="actions-inline" style="justify-content:space-between; margin-top:18px;">
+              <div class="price">R$ 259 <span>/ diária</span></div>
+              <a class="btn btn-primary" href="../veiculo/index.html">Detalhes</a>
+            </div>
+          </article>
+          <article class="vehicle-card">
+            <div class="vehicle-thumb"><img src="../assets/img/veiculos/compass.jpg" alt="Jeep Compass"></div>
+            <h3>Jeep Compass</h3>
+            <p>SUV ideal para viagens, deslocamentos urbanos e clientes que valorizam espaço e tecnologia.</p>
+            <div class="tags"><span class="tag">SUV</span><span class="tag">Automático</span><span class="tag">Conforto</span></div>
+            <div class="actions-inline" style="justify-content:space-between; margin-top:18px;">
+              <div class="price">R$ 319 <span>/ diária</span></div>
+              <a class="btn btn-primary" href="../veiculo/index.html">Detalhes</a>
+            </div>
+          </article>
+          <article class="vehicle-card">
+            <div class="vehicle-thumb"><img src="../assets/img/veiculos/hb20.jpg" alt="HB20 Comfort"></div>
+            <h3>HB20 Comfort</h3>
+            <p>Hatch compacto para o dia a dia, com boa economia, praticidade e mobilidade urbana.</p>
+            <div class="tags"><span class="tag">Hatch</span><span class="tag">Econômico</span><span class="tag">Flex</span></div>
+            <div class="actions-inline" style="justify-content:space-between; margin-top:18px;">
+              <div class="price">R$ 179 <span>/ diária</span></div>
+              <a class="btn btn-primary" href="../veiculo/index.html">Detalhes</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="como-funciona">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Como funciona.</h2>
+            <p>Um fluxo simples para facilitar a jornada do cliente desde a escolha do veículo até a confirmação da locação.</p>
+          </div>
+        </div>
+        <div class="grid-4">
+          <article class="feature-card"><div class="feature-icon">1</div><h3>Escolha o veículo</h3><p>Consulte o catálogo, compare categorias e encontre a opção ideal para sua necessidade.</p></article>
+          <article class="feature-card"><div class="feature-icon">2</div><h3>Preencha sua solicitação</h3><p>Informe cidade, período, categoria e demais dados para iniciar o atendimento.</p></article>
+          <article class="feature-card"><div class="feature-icon">3</div><h3>Receba seu orçamento</h3><p>A equipe analisa a disponibilidade e retorna com a proposta adequada para a locação.</p></article>
+          <article class="feature-card"><div class="feature-icon">4</div><h3>Conclua a contratação</h3><p>Após a aprovação, o processo segue para confirmação, documentação e retirada do veículo.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Perguntas frequentes.</h2>
+            <p>Informações essenciais para orientar o cliente e tornar a contratação mais objetiva.</p>
+          </div>
+        </div>
+        <div class="grid-2">
+          <article class="faq-item"><h3>Quais documentos são exigidos para alugar um carro?</h3><p>Normalmente, a locação exige documento oficial com foto, CPF, CNH válida e cartão em nome do titular, conforme a política da locadora.</p></article>
+          <article class="faq-item"><h3>Posso solicitar orçamento online?</h3><p>Sim. A plataforma permite registrar a solicitação com os dados principais da locação para atendimento pela equipe comercial.</p></article>
+          <article class="faq-item"><h3>Existe área do cliente?</h3><p>Sim. O projeto contempla uma área para acompanhar solicitações, contratos, pagamentos e informações cadastradas.</p></article>
+          <article class="faq-item"><h3>A Aluga Fácil atende locação corporativa?</h3><p>Sim. A estrutura da plataforma também atende empresas que precisam de veículos para demandas operacionais e executivas.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container cta-banner">
+        <div>
+          <div class="eyebrow">Solicite agora</div>
+          <h2>Fale com a Aluga Fácil e receba uma proposta para a sua próxima locação.</h2>
+          <p>Escolha o veículo ideal, envie sua solicitação e conte com um atendimento mais rápido e organizado.</p>
+        </div>
+        <a class="btn btn-light" href="../solicitar-orcamento/index.html">Solicitar orçamento</a>
+      </div>
+    </section>
+  </main>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

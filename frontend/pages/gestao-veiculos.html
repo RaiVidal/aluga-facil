@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestão de Veículos | Aluga Fácil</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/gestao-veiculos.css">
+</head>
+
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="../index.html">
+        <img src="../assets/img/logo-aluga-facil.jpg" alt="Aluga Fácil">
+      </a>
+
+      <nav class="sidebar-menu">
+        <a class="sidebar-link" href="dashboard-admin.html">Dashboard</a>
+        <a class="sidebar-link active" href="gestao-veiculos.html">Veículos</a>
+        <a class="sidebar-link" href="cadastro-veiculo.html">Cadastrar veículo</a>
+        <a class="sidebar-link" href="clientes.html">Clientes</a>
+        <a class="sidebar-link" href="reservas.html">Reservas</a>
+        <a class="sidebar-link" href="solicitacoes.html">Solicitações</a>
+        <a class="sidebar-link" href="relatorios.html">Relatórios</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a class="btn btn-primary" href="../index.html">Visualizar site</a>
+      </div>
+    </aside>
+
+    <main class="app-main">
+      <div class="topbar">
+        <div class="topbar-search">
+          <span>⌕</span>
+          <input type="text" placeholder="Buscar veículo">
+        </div>
+
+        <div class="actions-inline">
+          <span class="badge">Administrador</span>
+          <button class="btn btn-secondary" onclick="logout()">Sair</button>
+        </div>
+      </div>
+
+      <section class="content-area">
+        <section class="dashboard">
+          <div class="dashboard-header">
+            <div>
+              <h1>Gestão de Veículos</h1>
+              <p>Controle completo da frota cadastrada na plataforma.</p>
+            </div>
+
+            <a class="btn btn-primary" href="cadastro-veiculo.html">Novo veículo</a>
+          </div>
+
+          <div class="cards">
+            <div class="card">
+              <h3>Total</h3>
+              <strong id="total">0</strong>
+            </div>
+
+            <div class="card">
+              <h3>Disponíveis</h3>
+              <strong id="disponiveis">0</strong>
+            </div>
+
+            <div class="card">
+              <h3>Indisponíveis</h3>
+              <strong id="indisponiveis">0</strong>
+            </div>
+          </div>
+
+          <div class="table-box">
+            <table>
+              <thead>
+                <tr>
+                  <th>Foto</th>
+                  <th>Veículo</th>
+                  <th>Ano</th>
+                  <th>Diária</th>
+                  <th>Status</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+
+              <tbody id="tabelaVeiculos">
+                <tr>
+                  <td colspan="6">Carregando veículos...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="form-card" style="margin-top: 32px;">
+          <h3>Editar veículo</h3>
+          <p>Selecione um veículo na tabela para editar os dados.</p>
+
+          <form id="edit-vehicle-form">
+            <input type="hidden" id="edit_id">
+
+            <div class="field">
+              <label>Nome</label>
+              <input id="edit_name" type="text" required>
+            </div>
+
+            <div class="field">
+              <label>Marca</label>
+              <input id="edit_brand" type="text" required>
+            </div>
+
+            <div class="field">
+              <label>Modelo</label>
+              <input id="edit_model" type="text" required>
+            </div>
+
+            <div class="field">
+              <label>Ano</label>
+              <input id="edit_year" type="number" required>
+            </div>
+
+            <div class="field">
+              <label>Preço por dia</label>
+              <input id="edit_price_per_day" type="number" step="0.01" required>
+            </div>
+
+            <div class="field">
+              <label>Nova imagem</label>
+              <input id="edit_image_file" type="file" accept="image/*">
+            </div>
+
+            <div class="field full">
+              <img id="edit_preview_image" style="max-width:220px; margin-top:10px; display:none; border-radius:12px;">
+            </div>
+
+            <div class="field">
+              <label>Status</label>
+              <select id="edit_available">
+                <option value="1">Disponível</option>
+                <option value="0">Indisponível</option>
+              </select>
+            </div>
+
+            <div class="field full">
+              <label>Descrição</label>
+              <textarea id="edit_description"></textarea>
+            </div>
+
+            <button class="btn btn-primary" type="submit">Salvar alterações</button>
+          </form>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <script src="../assets/js/auth.js"></script>
+  <script>
+    protectPage("admin");
+  </script>
+  <script src="../assets/js/gestao-veiculos.js"></script>
+</body>
+</html>

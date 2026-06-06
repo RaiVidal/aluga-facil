@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solicitar orçamento | Aluga Fácil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" href="../inicio/index.html"><img src="../assets/img/logo-aluga-facil.jpg" alt="Aluga Fácil"></a>
+      <nav class="nav">
+        <a href="../inicio/index.html">Início</a>
+        <a href="../veiculos/index.html">Veículos</a>
+        <a href="../login/index.html">Entrar</a>
+      </nav>
+      <div class="header-actions">
+        <a class="btn btn-secondary" href="../veiculos/index.html">Ver veículos</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="eyebrow">Solicitação de orçamento</div>
+        <h1>Informe os dados da locação e receba uma proposta da Aluga Fácil.</h1>
+        <p>Preencha os campos abaixo para que a equipe avalie a disponibilidade da frota e envie um orçamento conforme a sua necessidade.</p>
+      </div>
+    </section>
+    <section class="section" style="padding-top:8px;">
+      <div class="container grid-2">
+        <article class="form-card">
+          <h3>Dados da locação</h3>
+          <form class="form-grid">
+            <div class="field"><label>Nome completo</label><input type="text" placeholder="Seu nome"></div>
+            <div class="field"><label>E-mail</label><input type="email" placeholder="seunome@email.com"></div>
+            <div class="field"><label>Telefone</label><input type="text" placeholder="(00) 00000-0000"></div>
+            <div class="field"><label>CNH</label><input type="text" placeholder="Número da CNH"></div>
+            <div class="field"><label>Cidade de retirada</label><select><option>Selecione</option><option>Fortaleza</option><option>Juazeiro do Norte</option></select></div>
+            <div class="field"><label>Cidade de devolução</label><select><option>Selecione</option><option>Fortaleza</option><option>Juazeiro do Norte</option></select></div>
+            <div class="field"><label>Data de retirada</label><input type="date"></div>
+            <div class="field"><label>Data de devolução</label><input type="date"></div>
+            <div class="field full"><label>Observações</label><textarea placeholder="Informe detalhes da locação desejada"></textarea></div>
+            <div class="field full"><button class="btn btn-primary" type="button">Enviar solicitação</button></div>
+          </form>
+        </article>
+        <article class="form-card">
+          <h3>O que você poderá acompanhar</h3>
+          <p>Após o envio da solicitação, a plataforma pode centralizar as informações principais do atendimento e da contratação em um único ambiente.</p>
+          <div class="grid-2" style="margin-top:20px;">
+            <div class="stat-card"><div class="stat-icon">A</div><h3>Pedido registrado</h3><p>Dados da locação organizados para análise e retorno da equipe comercial.</p></div>
+            <div class="stat-card"><div class="stat-icon">B</div><h3>Status do atendimento</h3><p>Acompanhamento do avanço da solicitação até a definição da proposta.</p></div>
+            <div class="stat-card"><div class="stat-icon">C</div><h3>Informações do cliente</h3><p>Campos preparados para concentrar cadastro, CNH e dados essenciais da contratação.</p></div>
+            <div class="stat-card"><div class="stat-icon">D</div><h3>Próximas etapas</h3><p>Base pronta para contratos, pagamentos e confirmações após a aprovação do orçamento.</p></div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+ <script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const botaoEnviar = document.querySelector('.btn-primary');
+        
+        if (botaoEnviar) {
+            botaoEnviar.addEventListener('click', async () => {
+                const inputs = document.querySelectorAll('input');
+                const selects = document.querySelectorAll('select');
+                const observacao = document.querySelector('textarea')?.value;
+
+                // AJUSTADO: Mudamos a estrutura para o que o Laravel costuma validar
+                const dadosOrcamento = {
+                    name: inputs[0]?.value,
+                    email: inputs[1]?.value,
+                    phone: inputs[2]?.value,
+                    cnh: inputs[3]?.value,
+                    pickup_city: selects[0]?.value,
+                    return_city: selects[1]?.value,
+                    start_date: inputs[4]?.value,
+                    end_date: inputs[5]?.value,
+                    notes: observacao,
+                    
+                    // Se o Laravel estiver pedindo a palavra exata do carro:
+                    vehicle_id: 1,
+                    vehicle: observacao || "Corolla",
+                    vehicle_model: observacao || "Corolla"
+                };
+
+                if (!dadosOrcamento.email || !dadosOrcamento.start_date || !dadosOrcamento.end_date) {
+                    alert('Por favor, preencha os dados principais (E-mail, Data de Retirada e Devolução).');
+                    return;
+                }
+
+                try {
+                    const token = localStorage.getItem('token');
+                    const response = await fetch('http://127.0.0.1:8000/api/budget-requests', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'Authorization': token ? `Bearer ${token}` : ''
+                        },
+                        body: JSON.stringify(dadosOrcamento)
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        alert('Solicitação de orçamento enviada com sucesso! Acompanhe no seu painel. 📋✨');
+                        window.location.href = window.location.origin + '/aluga-facil-main/painel/index.html';
+                    } else {
+                        // Se o Laravel rejeitar, ele vai mostrar os detalhes no alert para sabermos o nome do campo
+                        alert('Erro ao enviar: ' + (data.message || JSON.stringify(data.errors || data)));
+                    }
+                } catch (error) {
+                    console.error(error);
+                    alert('Erro de conexão com o servidor.');
+                }
+            });
+        }
+    });
+  </script>

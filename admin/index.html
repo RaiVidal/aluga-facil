@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel admin | Aluga Fácil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="../inicio/index.html"><img src="../assets/img/logo-aluga-facil.jpg" alt="Aluga Fácil"></a>
+      <nav class="sidebar-menu">
+        <a class="sidebar-link active" href="#">Dashboard</a>
+        <a class="sidebar-link" href="javascript:void(0);" id="link-veiculos">Veículos</a>
+        <a class="sidebar-link" href="javascript:void(0);" id="link-clientes">Clientes</a>
+        <a class="sidebar-link" href="javascript:void(0);" id="link-solicitacoes">Solicitações</a>
+        <a class="sidebar-link" href="javascript:void(0);" id="link-contratos">Contratos</a>
+        <a class="sidebar-link" href="javascript:void(0);" id="link-pagamentos">Pagamentos</a>
+        <a class="sidebar-link" href="javascript:void(0);" id="link-relatorios">Relatórios</a>
+      </nav>
+      <div class="sidebar-footer">
+        <a class="btn btn-primary" href="../inicio/index.html">Visualizar site</a>
+      </div>
+    </aside>
+    <main class="app-main">
+      <div class="topbar">
+        <div class="topbar-search"><span>⌕</span><input type="text" placeholder="Buscar veículo, cliente ou solicitação"></div>
+        <div class="actions-inline"><span class="badge">Administrador</span><a class="btn btn-secondary" href="../login/index.html">Sair</a></div>
+      </div>
+      <section class="content-area">
+        <div class="stat-grid">
+          <article class="stat-card"><div class="stat-icon" id="stat-veiculos-qtd">0</div><h2>Veículos ativos</h2><p>Controle da frota disponível para locação.</p></article>
+          <article class="stat-card"><div class="stat-icon" id="stat-clientes-qtd">0</div><h2>Clientes</h2><p>Base cadastrada para gestão comercial.</p></article>
+          <article class="stat-card"><div class="stat-icon" id="stat-solicitacoes-qtd">0</div><h2>Solicitações</h2><p>Pedidos recebidos para análise.</p></article>
+          <article class="stat-card"><div class="stat-icon" id="stat-pagamentos-qtd">R$ 0,00</div><h2>Receita</h2><p>Indicadores financeiros da operação.</p></article>
+        </div>
+        <div class="dashboard-grid">
+          <article class="dashboard-card">
+            <h3>Solicitações recentes</h3>
+            <p>Visão centralizada do fluxo comercial.</p>
+            <div class="list-row"><div><strong>Corolla • Cliente Premium</strong><div class="small">Período: 18/03 a 22/03</div></div><span class="badge">Novo pedido</span></div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="modal-veiculos-admin" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center; font-family: 'Inter', sans-serif;">
+    <div style="background: white; width: 85%; max-width: 800px; padding: 25px; border-radius: 16px; max-height: 85vh; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 15px;">
+        <h2 style="margin: 0; color: #121212;">Gerenciamento de Frota</h2>
+        <button id="fechar-modal-veiculos" style="background: none; border: none; font-size: 24px; cursor: pointer; color: #888;">&times;</button>
+      </div>
+
+      <div id="form-cadastro-veiculo" style="display: none; background: #f9f9f9; padding: 20px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #eee;">
+        <h4 style="margin-top: 0; margin-bottom: 15px; color: #a51c24; font-weight: 700;">Cadastrar Novo Veículo</h4>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div><label style="font-size: 12px; font-weight: bold;">Marca</label><input type="text" id="add-brand" placeholder="Ex: Toyota" style="width:100%; padding: 8px; margin-top:4px; border: 1px solid #ccc; border-radius:6px; box-sizing: border-box;"></div>
+          <div><label style="font-size: 12px; font-weight: bold;">Modelo</label><input type="text" id="add-model" placeholder="Ex: Corolla" style="width:100%; padding: 8px; margin-top:4px; border: 1px solid #ccc; border-radius:6px; box-sizing: border-box;"></div>
+          <div><label style="font-size: 12px; font-weight: bold;">Categoria</label><input type="text" id="add-category" placeholder="Ex: Sedan" style="width:100%; padding: 8px; margin-top:4px; border: 1px solid #ccc; border-radius:6px; box-sizing: border-box;"></div>
+          <div><label style="font-size: 12px; font-weight: bold;">Preço da Diária (R$)</label><input type="number" id="add-rate" placeholder="Ex: 250" style="width:100%; padding: 8px; margin-top:4px; border: 1px solid #ccc; border-radius:6px; box-sizing: border-box;"></div>
+          <div style="grid-column: span 2;"><label style="font-size: 12px; font-weight: bold;">Ano do Veículo</label><input type="number" id="add-year" placeholder="Ex: 2024" style="width:100%; padding: 8px; margin-top:4px; border: 1px solid #ccc; border-radius:6px; box-sizing: border-box;"></div>
+        </div>
+        <div style="margin-top: 15px; display: flex; gap: 10px;">
+          <button id="btn-salvar-veiculo" style="background: #137333; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold;">Salvar no Banco</button>
+          <button id="btn-cancelar-cadastro" style="background: #757575; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold;">Cancelar</button>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+        <h3 style="margin: 0; font-size: 16px; font-weight: 700;">Veículos Cadastrados</h3>
+        <button id="btn-abrir-cadastro" style="background: #a51c24; color: white; border: none; padding: 8px 14px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 13px;">+ Cadastrar Veículo</button>
+      </div>
+
+      <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;">
+        <thead>
+          <tr style="background: #f1f3f4; border-bottom: 2px solid #ddd;">
+            <th style="padding: 10px;">ID</th>
+            <th style="padding: 10px;">Veículo</th>
+            <th style="padding: 10px;">Categoria</th>
+            <th style="padding: 10px;">Valor Diária</th>
+            <th style="padding: 10px;">Ações</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-veiculos-corpo">
+          <tr><td colspan="5" style="padding:15px; text-align:center; color:#888;">Carregando frota...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="modal-clientes-admin" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center; font-family: 'Inter', sans-serif;">
+    <div style="background: white; width: 85%; max-width: 800px; padding: 25px; border-radius: 16px; max-height: 85vh; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 15px;">
+        <h2 style="margin: 0; color: #121212;">Clientes Cadastrados</h2>
+        <button id="fechar-modal-clientes" style="background: none; border: none; font-size: 24px; cursor: pointer; color: #888;">&times;</button>
+      </div>
+      <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;">
+        <thead>
+          <tr style="background: #f1f3f4; border-bottom: 2px solid #ddd;">
+            <th style="padding: 10px;">ID</th>
+            <th style="padding: 10px;">Nome</th>
+            <th style="padding: 10px;">E-mail</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-clientes-corpo">
+          <tr><td colspan="3" style="padding:15px; text-align:center; color:#888;">Carregando clientes...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="modal-solicitacoes-admin" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center; font-family: 'Inter', sans-serif;">
+    <div style="background: white; width: 85%; max-width: 850px; padding: 25px; border-radius: 16px; max-height: 85vh; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 15px;">
+        <h2 style="margin: 0; color: #121212;">Histórico de Pedidos de Orçamento</h2>
+        <button id="fechar-modal-solicitacoes" style="background: none; border: none; font-size: 24px; cursor: pointer; color: #888;">&times;</button>
+      </div>
+      <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;">
+        <thead>
+          <tr style="background: #f1f3f4; border-bottom: 2px solid #ddd;">
+            <th style="padding: 10px;">ID</th>
+            <th style="padding: 10px;">Cliente</th>
+            <th style="padding: 10px;">Veículo</th>
+            <th style="padding: 10px;">Status</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-solicitacoes-corpo">
+          <tr><td colspan="4" style="padding:15px; text-align:center; color:#888;">Carregando lista de orçamentos...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="modal-contratos-admin" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center; font-family: 'Inter', sans-serif;">
+    <div style="background: white; width: 85%; max-width: 850px; padding: 25px; border-radius: 16px; max-height: 85vh; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 15px;">
+        <h2 style="margin: 0; color: #121212;">Contratos Ativos</h2>
+        <button id="fechar-modal-contratos" style="background: none; border: none; font-size: 24px; cursor: pointer; color: #888;">&times;</button>
+      </div>
+      <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;">
+        <thead>
+          <tr style="background: #f1f3f4; border-bottom: 2px solid #ddd;">
+            <th style="padding: 10px;">ID</th>
+            <th style="padding: 10px;">Cliente</th>
+            <th style="padding: 10px;">Veículo</th>
+            <th style="padding: 10px;">Status</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-contratos-corpo">
+          <tr><td colspan="4" style="padding:15px; text-align:center; color:#888;">Carregando contratos ativos...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="modal-pagamentos-admin" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center; font-family: 'Inter', sans-serif;">
+    <div style="background: white; width: 85%; max-width: 800px; padding: 25px; border-radius: 16px; max-height: 85vh; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 15px;">
+        <h2 style="margin: 0; color: #121212;">Registro de Pagamentos</h2>
+        <button id="fechar-modal-pagamentos" style="background: none; border: none; font-size: 24px; cursor: pointer; color: #888;">&times;</button>
+      </div>
+      <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;">
+        <thead>
+          <tr style="background: #f1f3f4; border-bottom: 2px solid #ddd;">
+            <th style="padding: 10px;">ID</th>
+            <th style="padding: 10px;">Cliente</th>
+            <th style="padding: 10px;">Método</th>
+            <th style="padding: 10px;">Valor</th>
+            <th style="padding: 10px;">Status</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-pagamentos-corpo">
+          <tr><td colspan="5" style="padding:15px; text-align:center; color:#888;">Carregando dados financeiros...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="modal-relatorios-admin" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center; font-family: 'Inter', sans-serif;">
+    <div style="background: white; width: 85%; max-width: 700px; padding: 25px; border-radius: 16px; max-height: 85vh; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 15px;">
+        <h2 style="margin: 0; color: #121212;">Relatórios Dinâmicos do Sistema</h2>
+        <button id="fechar-modal-relatorios" style="background: none; border: none; font-size: 24px; cursor: pointer; color: #888;">&times;</button>
+      </div>
+      
+      <p style="font-size: 14px; color: #555; margin-bottom: 20px;">Resumo estatístico gerado em tempo real com base nos registros do banco de dados.</p>
+      
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 25px;">
+        <div style="background: #f8f9fa; border: 1px solid #e9ecef; padding: 15px; border-radius: 10px;">
+          <span style="font-size: 12px; font-weight: bold; color: #6c757d; text-transform: uppercase;">Performance Financeira</span>
+          <h3 id="rep-faturamento-total" style="margin: 8px 0 4px 0; color: #137333; font-size: 22px;">R$ 0,00</h3>
+          <p style="margin: 0; font-size: 12px; color: #888;">Total faturado acumulado</p>
+        </div>
+        <div style="background: #f8f9fa; border: 1px solid #e9ecef; padding: 15px; border-radius: 10px;">
+          <span style="font-size: 12px; font-weight: bold; color: #6c757d; text-transform: uppercase;">Ocupação da Frota</span>
+          <h3 id="rep-frota-total" style="margin: 8px 0 4px 0; color: #a51c24; font-size: 22px;">0 Veículos</h3>
+          <p style="margin: 0; font-size: 12px; color: #888;">Carros prontos para operação</p>
+        </div>
+        <div style="background: #f8f9fa; border: 1px solid #e9ecef; padding: 15px; border-radius: 10px; grid-column: span 2;">
+          <span style="font-size: 12px; font-weight: bold; color: #6c757d; text-transform: uppercase;">Volume de Conversão Comercial</span>
+          <h3 id="rep-pedidos-total" style="margin: 8px 0 4px 0; color: #1a73e8; font-size: 22px;">0 Pedidos</h3>
+          <p style="margin: 0; font-size: 12px; color: #888;">Total de intenções de orçamento recebidas no site</p>
+        </div>
+      </div>
+      
+      <div style="text-align: right;">
+        <button onclick="window.print();" style="background: #3c4043; color: white; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 13px;">🖨️ Imprimir Relatório</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', async () => {
+        
+        // --- ACEITAR / RECUSAR SOLICITAÇÕES VIA API ---
+        window.alterarStatusSolicitacao = async (id, novoStatus) => {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await fetch(`http://127.0.0.1:8000/api/budget-requests/${id}/status`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': token ? `Bearer ${token}` : ''
+                    },
+                    body: JSON.stringify({ status: novoStatus })
+                });
+
+                if (response.ok) {
+                    alert(`Solicitação foi ${novoStatus.toUpperCase()} com sucesso! `);
+                    window.location.reload(); 
+                } else {
+                    const data = await response.json();
+                    alert('Erro ao atualizar: ' + (data.message || 'O servidor recusou a alteração.'));
+                }
+            } catch (error) {
+                console.error(error);
+                alert('Erro de conexão com o servidor.');
+            }
+        };
+
+        // Renderização Dinâmica das Solicitações na Dashboard
+        const cardSolicitacoes = document.querySelector('.dashboard-card');
+        async function carregarDashboardSolicitacoes() {
+            if (!cardSolicitacoes) return;
+            try {
+                const response = await fetch('http://127.0.0.1:8000/api/budget-requests', {
+                    method: 'GET',
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    const solicitacoes = await response.json();
+                    document.getElementById('stat-solicitacoes-qtd').innerText = solicitacoes.length;
+                    const titulo = cardSolicitacoes.querySelector('h3').outerHTML;
+                    const descricao = cardSolicitacoes.querySelector('p').outerHTML;
+                    let novoConteudo = titulo + descricao;
+
+                    if (solicitacoes && solicitacoes.length > 0) {
+                        solicitacoes.slice(0, 5).forEach(pedido => {
+                            const dataInicio = pedido.start_date ? new Date(pedido.start_date).toLocaleDateString('pt-BR', {day: 'numeric', month: 'numeric'}) : '30/04';
+                            const dataFim = pedido.end_date ? new Date(pedido.end_date).toLocaleDateString('pt-BR', {day: 'numeric', month: 'numeric'}) : '09/05';
+                            const clienteNome = pedido.name || 'Cliente';
+                            const veiculoNome = pedido.vehicle || pedido.vehicle_model || pedido.name_vehicle || 'Corolla';
+                            
+                            let statusTexto = pedido.status || 'pendente';
+                            let estiloBadge = 'background-color: #ffeeed; color: #d32f2f;'; 
+
+                            if (statusTexto.toLowerCase() === 'aprovado') {
+                                estiloBadge = 'background-color: #e6f4ea; color: #137333;'; 
+                            } else if (statusTexto.toLowerCase() === 'reprovado') {
+                                estiloBadge = 'background-color: #f1f3f4; color: #5f6368;'; 
+                            }
+
+                            let botoesAcao = '';
+                            if (statusTexto.toLowerCase() === 'pendente') {
+                                botoesAcao = `
+                                    <div style="margin-top: 8px;">
+                                        <button onclick="alterarStatusSolicitacao(${pedido.id}, 'aprovado')" style="background-color: #137333; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: bold; margin-right: 5px;">✓ Aceitar</button>
+                                        <button onclick="alterarStatusSolicitacao(${pedido.id}, 'reprovado')" style="background-color: #d32f2f; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: bold;">✕ Recusar</button>
+                                    </div>
+                                `;
+                            }
+
+                            novoConteudo += `
+                                <div class="list-row" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #eee;">
+                                    <div>
+                                        <strong>${veiculoNome} • ${clienteNome}</strong>
+                                        <div class="small">Período: ${dataInicio} a ${dataFim}</div>
+                                        ${botoesAcao}
+                                    </div>
+                                    <span class="badge" style="padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; ${estiloBadge}">${statusTexto}</span>
+                                </div>
+                            `;
+                        });
+                        cardSolicitacoes.innerHTML = novoConteudo;
+                    } else {
+                        novoConteudo += `<div class="list-row" style="justify-content: center; color: #888;"><span>Nenhuma solicitação encontrada.</span></div>`;
+                        cardSolicitacoes.innerHTML = novoConteudo;
+                    }
+                }
+            } catch (error) { console.error(error); }
+        }
+
+        // --- GESTÃO DA FROTA ---
+        const linkVeiculos = document.getElementById('link-veiculos');
+        const modalVeiculos = document.getElementById('modal-veiculos-admin');
+        const fecharModal = document.getElementById('fechar-modal-veiculos');
+        const btnAbrirCadastro = document.getElementById('btn-abrir-cadastro');
+        const formCadastro = document.getElementById('form-cadastro-veiculo');
+        const btnCancelarCadastro = document.getElementById('btn-cancelar-cadastro');
+        const btnSalvarVeiculo = document.getElementById('btn-salvar-veiculo');
+        const tabelaCorpo = document.getElementById('tabela-veiculos-corpo');
+        const statVeiculosContador = document.getElementById('stat-veiculos-qtd');
+
+        async function carregarVeiculosAdmin() {
+            try {
+                const response = await fetch('http://127.0.0.1:8000/api/vehicles', {
+                    method: 'GET',
+                    headers: { 'Accept': 'application/json' }
+                });
+                if (response.ok) {
+                    const veiculos = await response.json();
+                    tabelaCorpo.innerHTML = '';
+                    if (statVeiculosContador) statVeiculosContador.innerText = veiculos.length;
+
+                    if(veiculos.length === 0) {
+                        tabelaCorpo.innerHTML = `<tr><td colspan="5" style="padding:15px; text-align:center; color:#888;">Nenhum carro cadastrado no banco.</td></tr>`;
+                        return;
+                    }
+
+                    veiculos.forEach(carro => {
+                        const nomeCarro = carro.name || `${carro.brand || ''} ${carro.model || ''}`;
+                        const valorDiaria = carro.price_per_day || carro.daily_rate || carro.price || '250';
+                        tabelaCorpo.innerHTML += `
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td style="padding: 10px;">${carro.id}</td>
+                                <td style="padding: 10px;"><strong>${nomeCarro}</strong></td>
+                                <td style="padding: 10px;">${carro.category || 'Sedan'}</td>
+                                <td style="padding: 10px;">R$ ${valorDiaria}</td>
+                                <td style="padding: 10px;">
+                                    <button onclick="deletarVeiculoAdmin(${carro.id})" style="background:#d32f2f; color:white; border:none; padding:6px 12px; border-radius:4px; cursor:pointer; font-size:12px; font-weight:bold;">Excluir</button>
+                                </td>
+                            </tr>
+                        `;
+                    });
+                }
+            } catch (error) { console.error(error); }
+        }
+
+        window.deletarVeiculoAdmin = async (id) => {
+            if(confirm("Deseja remover este veículo?")) {
+                try {
+                    await fetch(`http://127.0.0.1:8000/api/vehicles/${id}`, {
+                        method: 'DELETE',
+                        headers: { 'Accept': 'application/json' }
+                    });
+                    carregarVeiculosAdmin();
+                } catch(e) { alert("Erro ao deletar."); }
+            }
+        };
+
+        btnSalvarVeiculo.addEventListener('click', async () => {
+            const brand = document.getElementById('add-brand').value;
+            const model = document.getElementById('add-model').value;
+            const category = document.getElementById('add-category').value;
+            const rate = document.getElementById('add-rate').value;
+            const year = document.getElementById('add-year').value;
+
+            if(!brand || !model || !year || !rate) { alert("Por favor, preencha todos os campos!"); return; }
+
+            const dadosMapeados = {
+                name: `${brand} ${model}`, 
+                price_per_day: parseInt(rate), 
+                year: parseInt(year),
+                category: category || 'Sedan',
+                brand: brand,
+                model: model
+            };
+
+            try {
+                const response = await fetch('http://127.0.0.1:8000/api/vehicles', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify(dadosMapeados)
+                });
+
+                if(response.ok) {
+                    alert("O Veículo foi cadastrado com sucesso! 🎉");
+                    formCadastro.style.display = 'none';
+                    document.getElementById('add-brand').value = '';
+                    document.getElementById('add-model').value = '';
+                    document.getElementById('add-category').value = '';
+                    document.getElementById('add-rate').value = '';
+                    document.getElementById('add-year').value = '';
+                    carregarVeiculosAdmin();
+                }
+            } catch(error) { alert("Erro ao salvar."); }
+        });
+
+        linkVeiculos.addEventListener('click', () => { modalVeiculos.style.display = 'flex'; carregarVeiculosAdmin(); });
+        fecharModal.addEventListener('click', () => modalVeiculos.style.display = 'none');
+        btnAbrirCadastro.addEventListener('click', () => formCadastro.style.display = 'block');
+        btnCancelarCadastro.addEventListener('click', () => formCadastro.style.display = 'none');
+
+        // --- SISTEMA DEMAIS MODAIS (CLIENTES, SOLICITAÇÕES, CONTRATOS, PAGAMENTOS) ---
+        
+        // CLIENTES
+        const linkClientes = document.getElementById('link-clientes');
+        const modalClientes = document.getElementById('modal-clientes-admin');
+        const tabelaClientes = document.getElementById('tabela-clientes-corpo');
+        
+        async function carregarClientes() {
+            try {
+                const r = await fetch('http://127.0.0.1:8000/api/users');
+                if(r.ok) {
+                    const list = await r.json();
+                    document.getElementById('stat-clientes-qtd').innerText = list.length;
+                    tabelaClientes.innerHTML = '';
+                    list.forEach(cli => {
+                        tabelaClientes.innerHTML += `<tr style="border-bottom:1px solid #eee;"><td style="padding:10px;">${cli.id}</td><td style="padding:10px;"><strong>${cli.name}</strong></td><td style="padding:10px;">${cli.email}</td></tr>`;
+                    });
+                }
+            } catch(e){}
+        }
+        linkClientes.addEventListener('click', () => { modalClientes.style.display = 'flex'; carregarClientes(); });
+        document.getElementById('fechar-modal-clientes').addEventListener('click', () => modalClientes.style.display = 'none');
+
+        // SOLICITAÇÕES TOTAL
+        const linkSolicitacoes = document.getElementById('link-solicitacoes');
+        const modalSolicitacoes = document.getElementById('modal-solicitacoes-admin');
+        const tabelaSolicitacoes = document.getElementById('tabela-solicitacoes-corpo');
+
+        async function carregarTodasSolicitacoes() {
+            try {
+                const r = await fetch('http://127.0.0.1:8000/api/budget-requests');
+                if(r.ok) {
+                    const list = await r.json();
+                    tabelaSolicitacoes.innerHTML = '';
+                    list.forEach(sol => {
+                        tabelaSolicitacoes.innerHTML += `<tr style="border-bottom:1px solid #eee;"><td style="padding:10px;">${sol.id}</td><td style="padding:10px;">${sol.name}</td><td style="padding:10px;">${sol.vehicle || sol.vehicle_model}</td><td style="padding:10px;"><span class="badge">${sol.status}</span></td></tr>`;
+                    });
+                }
+            } catch(e){}
+        }
+        linkSolicitacoes.addEventListener('click', () => { modalSolicitacoes.style.display = 'flex'; carregarTodasSolicitacoes(); });
+        document.getElementById('fechar-modal-solicitacoes').addEventListener('click', () => modalSolicitacoes.style.display = 'none');
+
+        // CONTRATOS
+        const linkContratos = document.getElementById('link-contratos');
+        const modalContratos = document.getElementById('modal-contratos-admin');
+        const tabelaContratos = document.getElementById('tabela-contratos-corpo');
+
+        async function carregarContratos() {
+            try {
+                const r = await fetch('http://127.0.0.1:8000/api/contracts');
+                if(r.ok) {
+                    const list = await r.json();
+                    tabelaContratos.innerHTML = '';
+                    list.forEach(con => {
+                        tabelaContratos.innerHTML += `<tr style="border-bottom:1px solid #eee;"><td style="padding:10px;">#${con.id}</td><td style="padding:10px;">${con.client_name || 'Cliente'}</td><td style="padding:10px;">${con.vehicle_name || 'Carro'}</td><td style="padding:10px;"><span class="badge" style="background:#e6f4ea; color:#137333;">${con.status || 'Ativo'}</span></td></tr>`;
+                    });
+                }
+            } catch(e){
+                tabelaContratos.innerHTML = `<tr><td colspan="4" style="padding:15px; text-align:center; color:#888;">Nenhum contrato gerado até o momento.</td></tr>`;
+            }
+        }
+        linkContratos.addEventListener('click', () => { modalContratos.style.display = 'flex'; carregarContratos(); });
+        document.getElementById('fechar-modal-contratos').addEventListener('click', () => modalContratos.style.display = 'none');
+
+        // PAGAMENTOS
+        const linkPagamentos = document.getElementById('link-pagamentos');
+        const modalPagamentos = document.getElementById('modal-pagamentos-admin');
+        const tabelaPagamentos = document.getElementById('tabela-pagamentos-corpo');
+
+        async function carregarPagamentos() {
+            try {
+                const r = await fetch('http://127.0.0.1:8000/api/payments');
+                if(r.ok) {
+                    const list = await r.json();
+                    tabelaPagamentos.innerHTML = '';
+                    let somaTotal = 0;
+                    list.forEach(pag => {
+                        somaTotal += parseFloat(pag.amount);
+                        tabelaPagamentos.innerHTML += `<tr style="border-bottom:1px solid #eee;"><td style="padding:10px;">${pag.id}</td><td style="padding:10px;">${pag.client_name}</td><td style="padding:10px;">${pag.method}</td><td style="padding:10px;">R$ ${pag.amount}</td><td style="padding:10px;"><span class="badge" style="background:#e6f4ea;color:#137333;">${pag.status}</span></td></tr>`;
+                    });
+                    document.getElementById('stat-pagamentos-qtd').innerText = `R$ ${somaTotal.toFixed(2)}`;
+                }
+            } catch(e){
+                tabelaPagamentos.innerHTML = `<tr><td colspan="5" style="padding:15px; text-align:center; color:#888;">Sem registros financeiros no momento.</td></tr>`;
+            }
+        }
+        linkPagamentos.addEventListener('click', () => { modalPagamentos.style.display = 'flex'; carregarPagamentos(); });
+        document.getElementById('fechar-modal-pagamentos').addEventListener('click', () => modalPagamentos.style.display = 'none');
+
+
+        // --- BLOCO NOVO: LÓGICA DE RENDERIZAÇÃO DO MODAL DE RELATÓRIOS ---
+        const linkRelatorios = document.getElementById('link-relatorios');
+        const modalRelatorios = document.getElementById('modal-relatorios-admin');
+        const fecharModalRelatorios = document.getElementById('fechar-modal-relatorios');
+
+        async function carregarRelatorioGerencial() {
+            try {
+                // Busca veículos ativos para o resumo do relatório
+                const resVeiculos = await fetch('http://127.0.0.1:8000/api/vehicles');
+                const veiculos = resVeiculos.ok ? await resVeiculos.json() : [];
+                document.getElementById('rep-frota-total').innerText = `${veiculos.length} Veículos`;
+
+                // Busca solicitações (conversões comerciais)
+                const resSolicitacoes = await fetch('http://127.0.0.1:8000/api/budget-requests');
+                const solicitacoes = resSolicitacoes.ok ? await resSolicitacoes.json() : [];
+                document.getElementById('rep-pedidos-total').innerText = `${solicitacoes.length} Pedidos`;
+
+                // Busca pagamentos para somar a receita real do banco
+                const resPagamentos = await fetch('http://127.0.0.1:8000/api/payments');
+                if (resPagamentos.ok) {
+                    const pagamentos = await resPagamentos.json();
+                    let faturamentoAcumulado = 0;
+                    pagamentos.forEach(pag => { faturamentoAcumulado += parseFloat(pag.amount); });
+                    document.getElementById('rep-faturamento-total').innerText = `R$ ${faturamentoAcumulado.toFixed(2)}`;
+                }
+            } catch (error) {
+                console.error("Erro ao puxar dados do relatório:", error);
+            }
+        }
+
+        linkRelatorios.addEventListener('click', () => {
+            modalRelatorios.style.display = 'flex';
+            carregarRelatorioGerencial();
+        });
+        fecharModalRelatorios.addEventListener('click', () => {
+            modalRelatorios.style.display = 'none';
+        });
+
+
+        // Inicializadores de Contagem na Carga da Tela
+        carregarVeiculosAdmin();
+        carregarDashboardSolicitacoes();
+        carregarClientes();
+        carregarPagamentos();
+    });
+  </script>
+</body>
+</html>

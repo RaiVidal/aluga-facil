@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | Aluga Fácil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+  <div class="auth-wrap">
+    <aside class="auth-side">
+      <a class="auth-brand" href="../inicio/index.html"><img src="../assets/img/logo-aluga-facil.jpg" alt="Aluga Fácil"></a>
+      <h2>Acesse sua conta para acompanhar sua locação com mais praticidade.</h2>
+      <p>Entre na área do cliente para consultar solicitações, contratos, pagamentos e informações da sua conta em um único ambiente.</p>
+      <div class="auth-benefits">
+        <div class="auth-benefit"><h3>Solicitações centralizadas</h3><p>Visualize pedidos em andamento e acompanhe cada etapa do atendimento com mais organização.</p></div>
+        <div class="auth-benefit"><h3>Documentos e histórico</h3><p>Tenha acesso ao histórico de locações, contratos e informações relevantes do seu cadastro.</p></div>
+        <div class="auth-benefit"><h3>Ambiente seguro</h3><p>Uma área preparada para concentrar sua jornada com mais clareza, controle e conveniência.</p></div>
+      </div>
+    </aside>
+    <main class="auth-main">
+      <section class="auth-card">
+        <div class="eyebrow">Acesso do cliente</div>
+        <h1>Bem-vindo de volta.</h1>
+        <p>Faça login para acessar sua área, acompanhar solicitações e consultar as informações da sua locação.</p>
+        <form class="form-grid">
+          <div class="field full"><label>E-mail</label><input type="email" placeholder="seunome@email.com"></div>
+          <div class="field full"><label>Senha</label><input type="password" placeholder="Digite sua senha"></div>
+          <button class="btn btn-primary full" type="button">Entrar</button>
+        </form>
+        <div class="actions-inline" style="margin-top:18px; justify-content:space-between;">
+          <a class="btn btn-link" href="../recuperar-senha/index.html">Esqueci minha senha</a>
+          <a class="small" href="../cadastro/index.html">Criar conta</a>
+        </div>
+      </section>
+    </main>
+  </div>
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+    const botao = document.querySelector('.btn-primary');
+    
+    // TRUQUE DO DETETIVE: O JavaScript cria o botão do Admin sozinho e coloca na tela!
+    const containerForm = document.querySelector('form') || document.querySelector('.auth-wrap');
+    if (containerForm) {
+        const divAdmin = document.createElement('div');
+        divAdmin.innerHTML = `
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="#" id="btn-admin" style="color: #d32f2f; text-decoration: none; font-weight: bold; font-size: 14px; display: inline-block;">
+                    Entrar como Administrador →
+                </a>
+            </div>
+        `;
+        containerForm.appendChild(divAdmin);
+    }
+
+    // Ação do Botão do Cliente (E-mail e Senha)
+    if (botao) {
+        botao.addEventListener('click', async (e) => {
+            e.preventDefault();
+            
+            const email = document.querySelector('input[type="email"]')?.value;
+            const password = document.querySelector('input[type="password"]')?.value;
+
+            try {
+                const response = await fetch('http://127.0.0.1:8000/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert('Login realizado com sucesso! Bem-vinda de volta. 🚀');
+                    if (data.token) {
+                        localStorage.setItem('token', data.token);
+                    }
+                    // AQUI ESTÁ A LINHA DO CLIENTE ALTERADA PARA ENTRAR NO PAINEL DIRETO:
+                    window.location.href = "../painel/index.html";
+                } else {
+                    alert('Erro ao entrar: ' + (data.message || 'E-mail ou senha incorretos.'));
+                }
+            } catch (error) {
+                console.error(error);
+                alert('Erro de conexão com o servidor backend.');
+            }
+        });
+    }
+
+    // Ação do Botão do Administrador que acabamos de criar automaticamente
+    setTimeout(() => {
+        const botaoAdmin = document.querySelector('#btn-admin');
+        if (botaoAdmin) {
+            botaoAdmin.addEventListener('click', (e) => {
+                e.preventDefault();
+                // AQUI ESTÁ A LINHA DO ADMIN ALTERADA PARA ENTRAR NA DASHBOARD ADMIN:
+                window.location.href = "../admin/index.html";
+            });
+        }
+    }, 100);
+});
+</script>
+</body>
+</html>

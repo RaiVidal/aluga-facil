@@ -1,0 +1,117 @@
+{
+  "vehicles": [
+    {
+      "id": "corolla",
+      "name": "Toyota Corolla",
+      "description": "Sedan executivo com ótimo nível de conforto, desempenho equilibrado e excelente experiência de condução.",
+      "category": "Sedan",
+      "tags": ["Sedan", "Automático", "Executivo"],
+      "dailyRate": 259,
+      "image": "../assets/img/veiculos/corolla.jpg",
+      "specs": {
+        "motor": "2.0 Flex",
+        "cambio": "Automático",
+        "lugares": "5 passageiros",
+        "portaMalas": "470 litros",
+        "arCondicionado": "Digital",
+        "multimidia": "Tela integrada"
+      },
+      "gallery": [
+        "../assets/img/veiculos/corolla-main.jpg",
+        "../assets/img/veiculos/corolla-1.jpg",
+        "../assets/img/veiculos/corolla-2.jpg",
+        "../assets/img/veiculos/corolla-3.jpg"
+      ]
+    },
+    {
+      "id": "compass",
+      "name": "Jeep Compass",
+      "description": "SUV indicado para quem busca mais espaço interno, tecnologia embarcada e conforto em diferentes trajetos.",
+      "category": "SUV",
+      "tags": ["SUV", "Automático", "Premium"],
+      "dailyRate": 319,
+      "image": "../assets/img/veiculos/compass.jpg",
+      "specs": {
+        "motor": "2.0 Turbo",
+        "cambio": "Automático",
+        "lugares": "5 passageiros",
+        "portaMalas": "410 litros",
+        "arCondicionado": "Dual Zone",
+        "multimidia": "Uconnect"
+      },
+      "gallery": []
+    },
+    {
+      "id": "hb20",
+      "name": "HB20 Comfort",
+      "description": "Modelo compacto para deslocamentos urbanos, com boa economia, dirigibilidade e praticidade no dia a dia.",
+      "category": "Hatch",
+      "tags": ["Hatch", "Flex", "Econômico"],
+      "dailyRate": 179,
+      "image": "../assets/img/veiculos/hb20.jpg",
+      "specs": {
+        "motor": "1.0 Flex",
+        "cambio": "Manual",
+        "lugares": "5 passageiros",
+        "portaMalas": "300 litros",
+        "arCondicionado": "Manual",
+        "multimidia": "Bluetooth"
+      },
+      "gallery": []
+    },
+    {
+      "id": "onix",
+      "name": "Chevrolet Onix Plus",
+      "description": "Sedan versátil para uso urbano e viagens curtas, com bom espaço interno e dirigibilidade confortável.",
+      "category": "Sedan",
+      "tags": ["Sedan", "Flex", "Conforto"],
+      "dailyRate": 199,
+      "image": "../assets/img/veiculos/onix.jpg",
+      "specs": {
+        "motor": "1.0 Turbo",
+        "cambio": "Manual",
+        "lugares": "5 passageiros",
+        "portaMalas": "275 litros",
+        "arCondicionado": "Manual",
+        "multimidia": "MyLink"
+      },
+      "gallery": []
+    },
+    {
+      "id": "kicks",
+      "name": "Nissan Kicks",
+      "description": "SUV urbano com posição de dirigir elevada, conforto para passageiros e boa versatilidade de uso.",
+      "category": "SUV",
+      "tags": ["SUV", "Automático", "Urbano"],
+      "dailyRate": 239,
+      "image": "../assets/img/veiculos/kicks.jpg",
+      "specs": {
+        "motor": "1.6 Flex",
+        "cambio": "CVT",
+        "lugares": "5 passageiros",
+        "portaMalas": "432 litros",
+        "arCondicionado": "Automático",
+        "multimidia": "Nissan Connect"
+      },
+      "gallery": []
+    },
+    {
+      "id": "argo",
+      "name": "Fiat Argo",
+      "description": "Hatch prático para rotinas diárias, com manutenção acessível, economia e mobilidade eficiente.",
+      "category": "Hatch",
+      "tags": ["Hatch", "Compacto", "Flex"],
+      "dailyRate": 169,
+      "image": "../assets/img/veiculos/argo.jpg",
+      "specs": {
+        "motor": "1.0 Firefly",
+        "cambio": "Manual",
+        "lugares": "5 passageiros",
+        "portaMalas": "300 litros",
+        "arCondicionado": "Manual",
+        "multimidia": "Uconnect"
+      },
+      "gallery": []
+    }
+  ]
+}

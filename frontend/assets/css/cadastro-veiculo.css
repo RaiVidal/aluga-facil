@@ -1,0 +1,20 @@
+#vehicle-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 22px;
+}
+
+#vehicle-form .field.full {
+  grid-column: 1 / -1;
+}
+
+#vehicle-form button {
+  margin-top: 8px;
+}
+
+@media (max-width: 760px) {
+  #vehicle-form {
+    grid-template-columns: 1fr;
+  }
+}

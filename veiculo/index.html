@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detalhes do veículo | Aluga Fácil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <style>
+    .gallery-main,
+    .gallery-thumbs div {
+      background: #fff;
+      border: 1px solid rgba(18,18,18,0.06);
+      overflow: hidden;
+    }
+    .gallery-main::before {
+      display: none !important;
+      content: none !important;
+    }
+    .gallery-main img,
+    .gallery-thumbs div img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" href="../inicio/index.html"><img src="../assets/img/logo-aluga-facil.jpg" alt="Aluga Fácil"></a>
+      <nav class="nav">
+        <a href="../inicio/index.html">Início</a>
+        <a href="../veiculos/index.html">Veículos</a>
+        <a href="../solicitar-orcamento/index.html">Orçamento</a>
+      </nav>
+      <div class="header-actions">
+        <a class="btn btn-primary" href="../solicitar-orcamento/index.html">Solicitar orçamento</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="eyebrow">Detalhes do veículo</div>
+        <h1>Toyota Corolla XEi 2.0</h1>
+        <p>Confira as principais especificações do modelo e solicite um orçamento conforme o período e a cidade da sua locação.</p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:8px;">
+      <div class="container vehicle-detail">
+        <div>
+          <div class="gallery-main">
+            <img src="../assets/img/veiculos/corolla-main.jpg" alt="Toyota Corolla XEi 2.0">
+          </div>
+          <div class="gallery-thumbs">
+            <div><img src="../assets/img/veiculos/corolla-1.jpg" alt="Toyota Corolla lateral"></div>
+            <div><img src="../assets/img/veiculos/corolla-2.jpg" alt="Toyota Corolla frontal"></div>
+            <div><img src="../assets/img/veiculos/corolla-3.jpg" alt="Toyota Corolla traseira"></div>
+          </div>
+        </div>
+        <div class="form-card">
+          <h3>Conforto, desempenho e praticidade para diferentes perfis de uso.</h3>
+          <p>O Toyota Corolla é uma opção indicada para locações executivas, compromissos profissionais, viagens e deslocamentos com mais comodidade.</p>
+          <div class="tags"><span class="tag">Sedan</span><span class="tag">Automático</span><span class="tag">Executivo</span><span class="tag">Flex</span></div>
+          <div class="price" style="margin-top:8px;">R$ 259 <span>/ diária</span></div>
+          <div class="spec-list">
+            <div class="spec-item"><strong>Motorização</strong><span class="small">2.0 Flex</span></div>
+            <div class="spec-item"><strong>Câmbio</strong><span class="small">Automático</span></div>
+            <div class="spec-item"><strong>Lugares</strong><span class="small">5 passageiros</span></div>
+            <div class="spec-item"><strong>Porta-malas</strong><span class="small">470 litros</span></div>
+            <div class="spec-item"><strong>Ar-condicionado</strong><span class="small">Digital</span></div>
+            <div class="spec-item"><strong>Multimídia</strong><span class="small">Tela integrada</span></div>
+          </div>
+          <div class="actions-inline" style="margin-top:14px;">
+            <a class="btn btn-primary" href="../solicitar-orcamento/index.html">Solicitar orçamento</a>
+            <a class="btn btn-secondary" href="../veiculos/index.html">Voltar ao catálogo</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container grid-2">
+        <article class="feature-card"><h3>Sobre o veículo</h3><p>O Corolla é reconhecido pelo bom nível de acabamento, conforto interno e desempenho equilibrado, atendendo bem tanto locações pessoais quanto corporativas.</p></article>
+        <article class="feature-card"><h3>Diferenciais</h3><p>Modelo com ótimo espaço interno, câmbio automático, boa estabilidade e perfil ideal para quem busca uma locação mais confortável.</p></article>
+      </div>
+    </section>
+  </main>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
