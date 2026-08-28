@@ -1,4 +1,4 @@
-# ALUGA FÁCIL - Projeto Organizado
+# ALUGA FÁCIL - Protótipo de um Marketplace para aluguel de carros
 
 Estrutura organizada em duas partes:
 
