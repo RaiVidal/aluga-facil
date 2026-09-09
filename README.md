@@ -1,8 +1,8 @@
-# ALUGA FÁCIL - Protótipo de um Marketplace para aluguel de carros
+# ALUGA FÁCIL - Protótipo (web) de um Marketplace para aluguel de carros
 
 Estrutura organizada em duas partes:
 
-- `frontend/`: páginas HTML estáticas, CSS, JS, imagens e dados temporários.
+- `frontend/`: páginas HTML, CSS, JS, imagens e dados temporários. (Tailwind)
 - `backend/`: API Laravel, Scripts em PHP.
 
 ## Como abrir o frontend
